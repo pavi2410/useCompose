@@ -5,10 +5,10 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performClick
 import org.junit.Rule
 import org.junit.Test
 
@@ -79,5 +79,28 @@ class HooksTest {
 
         assert(onEnterInvoked == 1)
         assert(countUpdateInvoked == 5)
+    }
+
+    @Suppress("LocalVariableName")
+    @Test
+    fun useContextTest() {
+        composeTestRule.setContent {
+            val MyContext = createContext("")
+
+            Column {
+                MyContext.Provider(value = "outer") {
+                    val outerContextValue = useContext(MyContext)
+                    Text("context value is $outerContextValue", modifier = Modifier.testTag("outer"))
+
+                    MyContext.Provider(value = "inner") {
+                        val innerContextValue = useContext(MyContext)
+                        Text("context value is $innerContextValue", modifier = Modifier.testTag("inner"))
+                    }
+                }
+            }
+        }
+
+        composeTestRule.onNodeWithTag("outer").assertTextEquals("context value is outer")
+        composeTestRule.onNodeWithTag("inner").assertTextEquals("context value is inner")
     }
 }
