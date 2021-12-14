@@ -10,7 +10,9 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import me.pavi2410.useCompose.createContext
 import me.pavi2410.useCompose.demo.theme.UseComposeTheme
+import me.pavi2410.useCompose.useContext
 import me.pavi2410.useCompose.useEffect
 import me.pavi2410.useCompose.useState
 
@@ -21,7 +23,10 @@ class MainActivity : ComponentActivity() {
             UseComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Counter()
+                    Column {
+                        Counter()
+                        ContextExample()
+                    }
                 }
             }
         }
@@ -45,6 +50,25 @@ fun Counter() {
 
         Button(onClick = { setCount(count + 1) }) {
             Text("Click me")
+        }
+    }
+}
+
+
+@Suppress("LocalVariableName")
+@Composable
+fun ContextExample() {
+    val MyContext = createContext("")
+
+    Column {
+        MyContext.Provider(value = "outer") {
+            val outerContextValue = useContext(MyContext)
+            Text("context value is $outerContextValue")
+
+            MyContext.Provider(value = "inner") {
+                val innerContextValue = useContext(MyContext)
+                Text("context value is $innerContextValue")
+            }
         }
     }
 }
