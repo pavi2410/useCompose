@@ -1,4 +1,4 @@
-package me.pavi2410.demo
+package me.pavi2410.useCompose.app
 
 import org.junit.Test
 

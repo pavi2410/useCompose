@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose.demo.theme
+package me.pavi2410.useCompose.app.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

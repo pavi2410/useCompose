@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose.demo
+package me.pavi2410.useCompose.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import me.pavi2410.useCompose.createContext
-import me.pavi2410.useCompose.demo.theme.UseComposeTheme
+import me.pavi2410.useCompose.app.theme.UseComposeTheme
 import me.pavi2410.useCompose.useContext
 import me.pavi2410.useCompose.useEffect
 import me.pavi2410.useCompose.useState
