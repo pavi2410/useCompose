@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose
+package me.pavi2410.useCompose.react
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.*

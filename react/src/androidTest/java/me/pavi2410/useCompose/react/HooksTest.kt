@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose
+package me.pavi2410.useCompose.react
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button

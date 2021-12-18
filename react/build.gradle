@@ -74,7 +74,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = 'me.pavi2410.useCompose'
-                artifactId = 'useCompose'
+                artifactId = 'react'
                 version = '1.0'
             }
         }
