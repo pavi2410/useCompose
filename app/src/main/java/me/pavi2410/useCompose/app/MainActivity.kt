@@ -79,7 +79,7 @@ fun ContextExample() {
 fun NetworkTester() {
     val isConnected = useConnectionStatus()
 
-    Text(if (isConnected) "Network connected" else "Network Disconnected")
+    Text(if (isConnected) "Network connected" else "Network disconnected")
 }
 
 @Preview(showBackground = true)
