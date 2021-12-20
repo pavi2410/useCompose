@@ -4,6 +4,7 @@ import android.Manifest.permission.ACCESS_NETWORK_STATE
 import android.Manifest.permission.INTERNET
 import android.annotation.SuppressLint
 import android.net.ConnectivityManager
+import android.net.ConnectivityManager.NetworkCallback
 import android.net.Network
 import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
 import android.net.NetworkRequest
@@ -15,10 +16,10 @@ import androidx.core.content.getSystemService
 /**
  * A hook to monitor active network connection.
  */
-@RequiresPermission(allOf = [INTERNET, ACCESS_NETWORK_STATE])
+@RequiresPermission(ACCESS_NETWORK_STATE)
 @SuppressLint("ComposableNaming")
 @Composable
-fun useNetwork(): Boolean {
+fun useConnectionStatus(): Boolean {
     val context = LocalContext.current
 
     var isConnected by remember { mutableStateOf(false) }
@@ -26,7 +27,7 @@ fun useNetwork(): Boolean {
     DisposableEffect(true) {
         val connectivityManager = context.getSystemService<ConnectivityManager>()
 
-        val callback = object : ConnectivityManager.NetworkCallback() {
+        val callback = object : NetworkCallback() {
             override fun onAvailable(network: Network) {
                 isConnected = connectivityManager?.let { isNetworkConnected(it) } ?: true
             }
