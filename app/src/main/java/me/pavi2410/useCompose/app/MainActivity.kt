@@ -10,11 +10,12 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import me.pavi2410.useCompose.createContext
 import me.pavi2410.useCompose.app.theme.UseComposeTheme
-import me.pavi2410.useCompose.react.createContext
-import me.pavi2410.useCompose.react.useContext
-import me.pavi2410.useCompose.react.useEffect
-import me.pavi2410.useCompose.react.useState
+import me.pavi2410.useCompose.network.useNetwork
+import me.pavi2410.useCompose.useContext
+import me.pavi2410.useCompose.useEffect
+import me.pavi2410.useCompose.useState
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +27,7 @@ class MainActivity : ComponentActivity() {
                     Column {
                         Counter()
                         ContextExample()
+                        NetworkTester()
                     }
                 }
             }
@@ -71,6 +73,13 @@ fun ContextExample() {
             }
         }
     }
+}
+
+@Composable
+fun NetworkTester() {
+    val isConnected = useNetwork()
+
+    Text(if (isConnected) "Network connected" else "Network Disconnected")
 }
 
 @Preview(showBackground = true)
