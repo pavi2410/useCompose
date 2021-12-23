@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import me.pavi2410.useCompose.app.theme.UseComposeTheme
+import me.pavi2410.useCompose.network.useConnectionStatus
 import me.pavi2410.useCompose.react.createContext
 import me.pavi2410.useCompose.react.useContext
 import me.pavi2410.useCompose.react.useEffect
@@ -26,6 +27,7 @@ class MainActivity : ComponentActivity() {
                     Column {
                         Counter()
                         ContextExample()
+                        NetworkTester()
                     }
                 }
             }
@@ -71,6 +73,13 @@ fun ContextExample() {
             }
         }
     }
+}
+
+@Composable
+fun NetworkTester() {
+    val isConnected = useConnectionStatus()
+
+    Text(if (isConnected) "Network connected" else "Network disconnected")
 }
 
 @Preview(showBackground = true)

@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 rootProject.name = "useCompose"
 include ':app'
 include ':react'
+include ':network'
