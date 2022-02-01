@@ -41,14 +41,14 @@ class ReactQueryTest {
                     }
 
                     when (queryResult) {
-                        is QueryResult.Loading -> {
+                        is QueryState.Loading -> {
                             Text("Fetching data...", modifier = Modifier.testTag("loading"))
                         }
-                        is QueryResult.Error -> {
+                        is QueryState.Error -> {
                             Text("something went wrong...", modifier = Modifier.testTag("error"))
                         }
-                        is QueryResult.Content -> {
-                            val data = (queryResult as QueryResult.Content<String>).data
+                        is QueryState.Content -> {
+                            val data = (queryResult as QueryState.Content<String>).data
                             Text("got data -> $data", modifier = Modifier.testTag("data"))
                         }
                     }
