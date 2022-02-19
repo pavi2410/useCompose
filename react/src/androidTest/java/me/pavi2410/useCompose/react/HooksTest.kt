@@ -103,4 +103,39 @@ class HooksTest {
         composeTestRule.onNodeWithTag("outer").assertTextEquals("context value is outer")
         composeTestRule.onNodeWithTag("inner").assertTextEquals("context value is inner")
     }
+
+    @Test
+    fun useReducerTest() {
+        val initialState = MyState(0)
+
+        // Start the app
+        composeTestRule.setContent {
+            Surface(color = MaterialTheme.colors.background) {
+                Column {
+                    val (state, dispatch) = useReducer<MyState, MyAction>(initialState) { state, action ->
+                        when (action.type) {
+                            "increment" -> state.copy(count = state.count + 1)
+                            "decrement" -> state.copy(count = state.count - 1)
+                            else -> throw Error()
+                        }
+                    }
+
+                    Text("Count: ${state.count}")
+                    Button(onClick = {
+                        dispatch(MyAction("increment"))
+                    }) {
+                        Text("+")
+                    }
+                    Button(onClick = {
+                        dispatch(MyAction("decrement"))
+                    }) {
+                        Text("-")
+                    }
+                }
+            }
+        }
+    }
 }
+
+data class MyState(val count: Int)
+data class MyAction(val type: String)
