@@ -1,7 +1,6 @@
 package me.pavi2410.useCompose.network
 
 import android.Manifest.permission.ACCESS_NETWORK_STATE
-import android.Manifest.permission.INTERNET
 import android.annotation.SuppressLint
 import android.net.ConnectivityManager
 import android.net.ConnectivityManager.NetworkCallback
