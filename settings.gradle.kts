@@ -26,6 +26,7 @@ dependencyResolutionManagement {
             library("material", "com.google.android.material:material:1.4.0")
             library("androidx-lifecycle-runtime-ktx", "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
             library("androidx-activity-compose", "androidx.activity:activity-compose:1.4.0")
+            library("androidx-navigation-compose", "androidx.navigation:navigation-compose:2.4.1")
         }
     }
 }
