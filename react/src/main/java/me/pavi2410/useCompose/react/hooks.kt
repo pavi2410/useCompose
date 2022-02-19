@@ -55,10 +55,26 @@ fun <T> createContext(initialValue: T): ReactContext<T> {
 /**
  * A React-ish hook that returns the current value for that context.
  *
- * @see [useEffect](https://reactjs.org/docs/hooks-effect.html)
+ * @see [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext)
  */
 @SuppressLint("ComposableNaming")
 @Composable
 fun <T> useContext(context: ReactContext<T>): T {
     return context.LocalCtx.current
+}
+
+/**
+ * A hook from React that allows you to create a state machine using a [reducer] function.
+ *
+ * @see [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)
+ */
+@Composable
+fun <S, A> useReducer(initialState: S, reducer: (S, A) -> S): Pair<S, (A) -> Unit> {
+    var thisState by remember { mutableStateOf(initialState) }
+
+    fun dispatch(action: A) {
+        thisState = reducer(thisState, action)
+    }
+
+    return Pair(thisState, ::dispatch)
 }
