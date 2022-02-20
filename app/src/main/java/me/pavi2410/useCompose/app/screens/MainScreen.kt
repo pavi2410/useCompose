@@ -38,7 +38,7 @@ fun MainScreen(navController: NavController) {
                         navController.navigate(screen.route)
                     }) {
                     Column(Modifier.padding(16.dp)) {
-                        Text(screen.route, Modifier.fillMaxSize())
+                        Text(screen.title, Modifier.fillMaxSize())
                     }
                 }
             }
