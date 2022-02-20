@@ -11,6 +11,7 @@ sealed class ExampleScreen(
     object Counter : ExampleScreen("counter", "Counter", { CounterExample() })
     object Context : ExampleScreen("context", "Context", { ContextExample() })
     object Reducer : ExampleScreen("reducer", "Reducer", { ReducerExample() })
+    object Toggle : ExampleScreen("toggle", "Toggle", { ToggleExample() })
     object Network : ExampleScreen("network", "Network", { NetworkExample() })
 }
 
@@ -19,5 +20,6 @@ val exampleScreens
         ExampleScreen.Counter,
         ExampleScreen.Context,
         ExampleScreen.Reducer,
+        ExampleScreen.Toggle,
         ExampleScreen.Network
     )

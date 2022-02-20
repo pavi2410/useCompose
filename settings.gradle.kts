@@ -37,4 +37,5 @@ rootProject.name = "useCompose"
 
 include(":app")
 include(":react")
+include(":hooks")
 include(":network")

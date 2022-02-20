@@ -1,22 +1,18 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
+    id("maven-publish")
 }
 
 android {
     compileSdk = 31
 
     defaultConfig {
-        applicationId = "me.pavi2410.usecompose.demo"
         minSdk = 21
         targetSdk = 31
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -39,21 +35,31 @@ android {
 }
 
 dependencies {
-    implementation(projects.react)
-    implementation(projects.hooks)
-    implementation(projects.network)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.compose.ui)
     implementation(libs.compose.material)
     implementation(libs.compose.tooling.preview)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.navigation.compose)
+
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    // Test rules and transitive dependencies:
     androidTestImplementation(libs.compose.test.junit4)
+    // Needed for createComposeRule, but not createAndroidComposeRule:
     debugImplementation(libs.compose.test.manifest)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("maven") {
+                from(components["release"])
+
+                groupId = "me.pavi2410.useCompose"
+                artifactId = "hooks"
+                version = "1.0.0"
+            }
+        }
+    }
 }
