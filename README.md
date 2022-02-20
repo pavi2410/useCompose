@@ -1,7 +1,6 @@
-useCompose
----
+# useCompose
 
-React inspired hooks for Compose
+Headless @Composable hooks that drive UI logic. Inspired by React. 
 
 [![](https://jitpack.io/v/pavi2410/useCompose.svg)](https://jitpack.io/#pavi2410/useCompose) [![CI](https://github.com/pavi2410/useCompose/actions/workflows/ci.yml/badge.svg)](https://github.com/pavi2410/useCompose/actions/workflows/ci.yml)
 
@@ -13,6 +12,10 @@ React inspired hooks for Compose
 - useState
 - useEffect
 - useContext
+- useReducer
+
+### 🪝 hooks
+- useToggle
 
 ### 🕸 network
 - useConnnectionStatus
@@ -23,10 +26,10 @@ Step 1. Add the JitPack repository to your build file
 
 Add it in your root build.gradle at the end of repositories:
 ```gradle
-allprojects {
-  repositories {
-    ...
-    maven { url 'https://jitpack.io' }
+repositories {
+  ...
+  maven {
+    url = uri("https://jitpack.io")
   }
 }
 ```
@@ -34,9 +37,14 @@ allprojects {
 Step 2. Add the dependency
 ```gradle
 dependencies {
-  implementation 'com.github.pavi2410.useCompose:<module_name>:<version>'
+  implementation("com.github.pavi2410.useCompose:<module_name>:<version>")
 }
 ```
 
 ## Help Wanted
-I want your help in making this library extensive such that this covers many of the commonly used hooks. Also, I want your help in building a KMP friendly library.
+
+I want your help in making this library extensive such that this cover many of the commonly used hooks. Also, I want your help in building a KMP friendly library.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
