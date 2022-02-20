@@ -40,6 +40,7 @@ android {
 
 dependencies {
     implementation(projects.react)
+    implementation(projects.hooks)
     implementation(projects.network)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
