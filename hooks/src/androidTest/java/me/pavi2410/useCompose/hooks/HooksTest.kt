@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose.react
+package me.pavi2410.useCompose.hooks
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
@@ -38,7 +38,7 @@ class HooksTest {
         }
 
         // initial state
-        composeTestRule.onNodeWithTag("status").assertTextEquals("Switch = ON")
+        composeTestRule.onNodeWithTag("status").assertTextEquals("Switch = OFF")
 
         composeTestRule.onNodeWithText("Toggle").performClick()
         composeTestRule.onNodeWithTag("status").assertTextEquals("Switch = ON")

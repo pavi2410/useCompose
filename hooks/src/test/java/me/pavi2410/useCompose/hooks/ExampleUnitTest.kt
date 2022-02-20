@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose.react
+package me.pavi2410.useCompose.hooks
 
 import org.junit.Test
 
