@@ -17,6 +17,7 @@ dependencyResolutionManagement {
             version("compose", "1.1.0")
             library("compose-ui", "androidx.compose.ui", "ui").versionRef("compose")
             library("compose-material", "androidx.compose.material", "material").versionRef("compose")
+            library("compose-tooling-debug", "androidx.compose.ui", "ui-tooling").versionRef("compose")
             library("compose-tooling-preview", "androidx.compose.ui", "ui-tooling-preview").versionRef("compose")
             library("compose-test-junit4", "androidx.compose.ui", "ui-test-junit4").versionRef("compose")
             library("compose-test-manifest", "androidx.compose.ui", "ui-test-manifest").versionRef("compose")

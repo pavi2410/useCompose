@@ -1,35 +1,42 @@
 package me.pavi2410.useCompose.app.screens
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import me.pavi2410.useCompose.react.useReducer
 
 data class MyState(val count: Int)
-data class MyAction(val type: String)
+sealed interface MyAction {
+    object Increment : MyAction
+    object Decrement : MyAction
+}
 
 val initialState = MyState(0)
 
+@Preview(showBackground = true)
 @Composable
 fun ReducerExample() {
-    Column {
+    Column(Modifier.padding(16.dp)) {
         val (state, dispatch) = useReducer<MyState, MyAction>(initialState) { state, action ->
-            when (action.type) {
-                "increment" -> state.copy(count = state.count + 1)
-                "decrement" -> state.copy(count = state.count - 1)
-                else -> throw Error()
+            when (action) {
+                MyAction.Increment -> state.copy(count = state.count + 1)
+                MyAction.Decrement -> state.copy(count = state.count - 1)
             }
         }
 
         Text("Count: ${state.count}")
         Button(onClick = {
-            dispatch(MyAction("increment"))
+            dispatch(MyAction.Increment)
         }) {
             Text("+")
         }
         Button(onClick = {
-            dispatch(MyAction("decrement"))
+            dispatch(MyAction.Decrement)
         }) {
             Text("-")
         }

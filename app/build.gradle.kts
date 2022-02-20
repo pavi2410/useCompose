@@ -56,4 +56,5 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation(libs.compose.test.junit4)
     debugImplementation(libs.compose.test.manifest)
+    debugImplementation(libs.compose.tooling.debug)
 }
