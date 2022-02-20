@@ -10,6 +10,7 @@ sealed class ExampleScreen(
 ) {
     object Counter : ExampleScreen("counter", "Counter", { CounterExample() })
     object Context : ExampleScreen("context", "Context", { ContextExample() })
+    object Reducer : ExampleScreen("reducer", "Reducer", { ReducerExample() })
     object Network : ExampleScreen("network", "Network", { NetworkExample() })
 }
 
@@ -17,5 +18,6 @@ val exampleScreens
     get() = listOf(
         ExampleScreen.Counter,
         ExampleScreen.Context,
+        ExampleScreen.Reducer,
         ExampleScreen.Network
     )
