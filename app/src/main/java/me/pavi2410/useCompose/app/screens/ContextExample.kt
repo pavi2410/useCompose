@@ -9,33 +9,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import me.pavi2410.useCompose.app.components.ExampleScreenScaffold
 import me.pavi2410.useCompose.react.createContext
 import me.pavi2410.useCompose.react.useContext
 
 @Suppress("LocalVariableName")
 @Composable
-fun ContextExample(navController: NavController) {
-    ExampleScreenScaffold(navController, "Context") {
-        Column {
-            val ColorContext = createContext(Color.Red)
+fun ContextExample() {
+    Column {
+        val ColorContext = createContext(Color.Red)
 
-            val outerColor = useContext(ColorContext)
-            Box(
-                modifier = Modifier
-                    .size(128.dp)
-                    .background(outerColor),
-                contentAlignment = Alignment.Center
-            ) {
-                ColorContext.Provider(value = Color.Blue) {
-                    val innerColor = useContext(ColorContext)
-                    Box(
-                        modifier = Modifier
-                            .size(64.dp)
-                            .background(innerColor)
-                    )
-                }
+        val outerColor = useContext(ColorContext)
+        Box(
+            modifier = Modifier
+                .size(128.dp)
+                .background(outerColor),
+            contentAlignment = Alignment.Center
+        ) {
+            ColorContext.Provider(value = Color.Blue) {
+                val innerColor = useContext(ColorContext)
+                Box(
+                    modifier = Modifier
+                        .size(64.dp)
+                        .background(innerColor)
+                )
             }
         }
     }

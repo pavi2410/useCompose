@@ -8,8 +8,9 @@ import androidx.compose.material.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import me.pavi2410.useCompose.app.screens.Screen
-import me.pavi2410.useCompose.app.screens.allScreens
+import me.pavi2410.useCompose.app.components.ExampleScreenScaffold
+import me.pavi2410.useCompose.app.screens.MainScreen
+import me.pavi2410.useCompose.app.screens.exampleScreens
 import me.pavi2410.useCompose.app.theme.UseComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,10 +22,13 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     val navController = rememberNavController()
 
-                    NavHost(navController = navController, startDestination = Screen.Main.route) {
-                        allScreens.forEach { screen ->
+                    NavHost(navController = navController, startDestination = "main") {
+                        composable("main") { MainScreen(navController) }
+                        exampleScreens.forEach { screen ->
                             composable(screen.route) {
-                                screen.content(navController)
+                                ExampleScreenScaffold(navController, title = screen.title) {
+                                    screen.content()
+                                }
                             }
                         }
                     }
