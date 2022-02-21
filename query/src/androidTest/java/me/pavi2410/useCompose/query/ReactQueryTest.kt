@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose.reactQuery
+package me.pavi2410.useCompose.query
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button

@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose.reactQuery
+package me.pavi2410.useCompose.query
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.*
