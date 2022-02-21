@@ -13,6 +13,7 @@ sealed class ExampleScreen(
     object Toggle : ExampleScreen("toggle", "Toggle", { ToggleExample() })
     object Network : ExampleScreen("network", "Network", { NetworkExample() })
     object Query : ExampleScreen("query", "Query", { QueryExample() })
+    object Mutation : ExampleScreen("mutation", "Mutation", { MutationExample() })
 }
 
 val exampleScreens
@@ -23,4 +24,5 @@ val exampleScreens
         ExampleScreen.Toggle,
         ExampleScreen.Network,
         ExampleScreen.Query,
+        ExampleScreen.Mutation,
     )
