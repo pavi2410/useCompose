@@ -42,6 +42,7 @@ dependencies {
     implementation(projects.react)
     implementation(projects.hooks)
     implementation(projects.network)
+    implementation(projects.query)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
