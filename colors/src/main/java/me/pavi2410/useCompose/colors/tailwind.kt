@@ -4,6 +4,12 @@ package me.pavi2410.useCompose.colors
 
 import androidx.compose.ui.graphics.Color
 
+
+/**
+ * Colors taken from tailwindcss. This set of colors look much vibrant and beautiful compared to Material Design one.
+ *
+ * Check out the [tailwindcss color palette](https://tailwindcss.com/docs/customizing-colors#default-color-palette)
+ */
 object TwColors {
     val slate50 = Color(0xfff8fafc)
     val slate100 = Color(0xfff1f5f9)
