@@ -1,7 +1,6 @@
 package me.pavi2410.useCompose.app.screens
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 
 sealed class ExampleScreen(
     val route: String,
@@ -13,6 +12,8 @@ sealed class ExampleScreen(
     object Reducer : ExampleScreen("reducer", "Reducer", { ReducerExample() })
     object Toggle : ExampleScreen("toggle", "Toggle", { ToggleExample() })
     object Network : ExampleScreen("network", "Network", { NetworkExample() })
+    object Query : ExampleScreen("query", "Query", { QueryExample() })
+    object Mutation : ExampleScreen("mutation", "Mutation", { MutationExample() })
 }
 
 val exampleScreens
@@ -21,5 +22,7 @@ val exampleScreens
         ExampleScreen.Context,
         ExampleScreen.Reducer,
         ExampleScreen.Toggle,
-        ExampleScreen.Network
+        ExampleScreen.Network,
+        ExampleScreen.Query,
+        ExampleScreen.Mutation,
     )
