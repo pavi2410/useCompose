@@ -1,6 +1,6 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -43,19 +43,20 @@ dependencies {
     implementation(projects.hooks)
     implementation(projects.network)
     implementation(projects.query)
+
+    implementation(platform(libs.compose.bom))
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     implementation(libs.compose.ui)
     implementation(libs.compose.material)
     implementation(libs.compose.tooling.preview)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-    testImplementation("junit:junit:4.+")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(libs.compose.test.junit4)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+//    androidTestImplementation(libs.compose.test.junit4)
     debugImplementation(libs.compose.test.manifest)
     debugImplementation(libs.compose.tooling.debug)
 }
