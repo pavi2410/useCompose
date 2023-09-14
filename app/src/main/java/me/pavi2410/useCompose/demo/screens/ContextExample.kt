@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose.app.screens
+package me.pavi2410.useCompose.demo.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

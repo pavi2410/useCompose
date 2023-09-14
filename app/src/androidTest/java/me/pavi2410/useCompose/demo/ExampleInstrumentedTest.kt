@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose.app
+package me.pavi2410.useCompose.demo
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

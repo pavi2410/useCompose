@@ -1,4 +1,4 @@
-package me.pavi2410.useCompose.app.components
+package me.pavi2410.useCompose.demo.components
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons

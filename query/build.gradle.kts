@@ -31,7 +31,11 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
     kotlinOptions {
-        jvmTarget = "19"
+        jvmTarget = "17"
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     packaging {
         resources {
