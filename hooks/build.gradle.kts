@@ -35,7 +35,9 @@ android {
 }
 
 dependencies {
-    api(platform(libs.compose.bom))
+    val composeBom = platform(libs.compose.bom)
+    api(composeBom)
+    androidTestApi(composeBom)
     api(libs.compose.ui)
     api(libs.compose.material)
     api(libs.compose.tooling.preview)

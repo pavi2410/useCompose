@@ -1,7 +1,7 @@
 [versions]
 androidGradlePlugin = "8.1.1"
-kotlinAndroid = "1.6.21"
-compose = "1.5.1"
+kotlinAndroid = "1.9.10"
+compose = "1.5.3"
 espressoCore = "3.5.1"
 junit = "1.1.5"
 junitVersion = "4.13.2"

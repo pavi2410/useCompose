@@ -44,7 +44,9 @@ dependencies {
     implementation(projects.network)
     implementation(projects.query)
 
-    implementation(platform(libs.compose.bom))
+    val composeBom = platform(libs.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
     implementation(libs.androidx.core.ktx)
     implementation(libs.compose.ui)
     implementation(libs.compose.material)
