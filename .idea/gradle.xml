@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/colors" />
             <option value="$PROJECT_DIR$/hooks" />
             <option value="$PROJECT_DIR$/network" />
+            <option value="$PROJECT_DIR$/query" />
             <option value="$PROJECT_DIR$/react" />
           </set>
         </option>
