@@ -24,8 +24,29 @@ fun <T> useState(defaultValue: T): Pair<T, (T) -> Unit> {
  */
 @SuppressLint("ComposableNaming")
 @Composable
-fun useEffect(vararg deps: Any, block: suspend CoroutineScope.() -> Unit) {
-    LaunchedEffect(keys = deps, block = block)
+fun useEffect(deps: Array<Any> = emptyArray(),
+              onEffect: suspend () -> Unit,
+              onDispose: () -> Unit = {}) {
+
+    val currentOnEffect = rememberUpdatedState(onEffect)
+    val currentOnDispose = rememberUpdatedState(onDispose)
+
+    if (deps.isEmpty()) {
+
+        LaunchedEffect(Unit) {
+            currentOnEffect.value()
+        }
+        DisposableEffect(Unit) {
+            onDispose { currentOnDispose.value() }
+        }
+    }else {
+        LaunchedEffect(deps) {
+            currentOnEffect.value()
+        }
+        DisposableEffect(deps) {
+            onDispose { currentOnDispose.value() }
+        }
+    }
 }
 
 @Suppress("PropertyName")
