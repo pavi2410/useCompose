@@ -46,9 +46,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.react)
-    implementation(projects.hooks)
-    implementation(projects.network)
     implementation(projects.query)
 
     val composeBom = platform(libs.compose.bom)
