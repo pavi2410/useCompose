@@ -1,5 +1,5 @@
 [versions]
-androidGradlePlugin = "8.1.1"
+androidGradlePlugin = "8.12.3"
 kotlinAndroid = "1.9.10"
 compose = "1.5.3"
 espressoCore = "3.5.1"
