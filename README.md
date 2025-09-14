@@ -4,24 +4,12 @@ Headless @Composable hooks that drive UI logic. Inspired by React.
 
 [![](https://jitpack.io/v/pavi2410/useCompose.svg)](https://jitpack.io/#pavi2410/useCompose) [![CI](https://github.com/pavi2410/useCompose/actions/workflows/ci.yml/badge.svg)](https://github.com/pavi2410/useCompose/actions/workflows/ci.yml)
 
-| ⚛ `react` | ❓ `query` |
-| --- | --- |
-| ![react example](https://github.com/pavi2410/useCompose/assets/28837746/0a271bda-fc47-47b3-8cb6-daf6748a2633) | ![query example](https://github.com/pavi2410/useCompose/assets/28837746/2317d447-8f8b-4626-b92e-2e024e242714) |
+| ❓ `query` |
+| --- |
+| ![query example](https://github.com/pavi2410/useCompose/assets/28837746/2317d447-8f8b-4626-b92e-2e024e242714) |
 
 
 ## Modules
-
-### ⚛ react
-- useState
-- useEffect
-- useContext
-- useReducer
-
-### 🪝 hooks
-- useToggle
-
-### 🕸 network
-- useConnnectionStatus
 
 ### ❓ query
 - useQuery
