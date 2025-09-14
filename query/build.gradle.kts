@@ -1,11 +1,14 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     id("maven-publish")
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 36
     namespace = "me.pavi2410.useCompose.query"
 
     defaultConfig {
@@ -27,12 +30,6 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -41,6 +38,12 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 
