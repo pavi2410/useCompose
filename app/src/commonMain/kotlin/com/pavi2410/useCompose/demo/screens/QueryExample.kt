@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.pavi2410.useCompose.query.DataState
 import kotlinx.coroutines.delay
 import com.pavi2410.useCompose.query.useQuery
 import com.pavi2410.useCompose.query.QueryState
@@ -21,14 +22,14 @@ fun QueryExample(modifier: Modifier = Modifier) {
             "secret_token_${System.currentTimeMillis()}"
         }
 
-        when (val state = queryState) {
-            is QueryState.Loading -> {
+        when (val state = queryState.dataState) {
+            is DataState.Pending -> {
                 Text("Loading data...")
             }
-            is QueryState.Error -> {
-                Text("Error: ${state.message.message}")
+            is DataState.Error -> {
+                Text("Error: ${state.message}")
             }
-            is QueryState.Content -> {
+            is DataState.Success<*> -> {
                 Text("Success: ${state.data}")
             }
         }
