@@ -81,6 +81,7 @@ fun MutationExample(modifier: Modifier = Modifier) {
                     text = "Please wait...",
                 )
             }
+
             is MutationState.Error -> {
                 Text(
                     text = "Error: $errorMessage",

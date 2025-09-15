@@ -19,52 +19,59 @@ import com.pavi2410.useCompose.demo.screens.BasicExample
 import com.pavi2410.useCompose.demo.screens.MainScreen
 import com.pavi2410.useCompose.demo.screens.MutationExample
 import com.pavi2410.useCompose.demo.screens.QueryExample
-import com.pavi2410.useCompose.demo.Screen
 import com.pavi2410.useCompose.demo.screens.SimpleExample
 import com.pavi2410.useCompose.demo.theme.UseComposeTheme
+import com.pavi2410.useCompose.query.QueryClientProvider
+import com.pavi2410.useCompose.query.core.QueryClient
 
 @Composable
 fun App() {
     UseComposeTheme {
-        var currentScreen by remember { mutableStateOf<Screen>(Screen.Home) }
+        QueryClientProvider(client = remember { QueryClient() }) {
+            var currentScreen by remember { mutableStateOf<Screen>(Screen.Home) }
 
-        val showBackButton = currentScreen != Screen.Home
+            val showBackButton = currentScreen != Screen.Home
 
-        Scaffold(
-            modifier = Modifier.systemBarsPadding(),
-            topBar = {
-                TopAppBar(
-                    title = { Text(currentScreen.title) },
-                    navigationIcon = if (showBackButton) {
-                        {
-                            IconButton(onClick = { currentScreen = Screen.Home }) {
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                    contentDescription = "Back"
-                                )
+            Scaffold(
+                modifier = Modifier.systemBarsPadding(),
+                topBar = {
+                    TopAppBar(
+                        title = { Text(currentScreen.title) },
+                        navigationIcon = if (showBackButton) {
+                            {
+                                IconButton(onClick = { currentScreen = Screen.Home }) {
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                        contentDescription = "Back"
+                                    )
+                                }
                             }
-                        }
-                    } else null
-                )
-            }
-        ) { paddingValues ->
-            when (currentScreen) {
-                Screen.Home -> MainScreen(
-                    onNavigate = { screen -> currentScreen = screen },
-                    modifier = Modifier.padding(paddingValues)
-                )
-                Screen.Query -> QueryExample(
-                    modifier = Modifier.padding(paddingValues)
-                )
-                Screen.Mutation -> MutationExample(
-                    modifier = Modifier.padding(paddingValues)
-                )
-                Screen.Simple -> SimpleExample(
-                    modifier = Modifier.padding(paddingValues)
-                )
-                Screen.Basic -> BasicExample(
-                    modifier = Modifier.padding(paddingValues)
-                )
+                        } else null
+                    )
+                }
+            ) { paddingValues ->
+                when (currentScreen) {
+                    Screen.Home -> MainScreen(
+                        onNavigate = { screen -> currentScreen = screen },
+                        modifier = Modifier.padding(paddingValues)
+                    )
+
+                    Screen.Query -> QueryExample(
+                        modifier = Modifier.padding(paddingValues)
+                    )
+
+                    Screen.Mutation -> MutationExample(
+                        modifier = Modifier.padding(paddingValues)
+                    )
+
+                    Screen.Simple -> SimpleExample(
+                        modifier = Modifier.padding(paddingValues)
+                    )
+
+                    Screen.Basic -> BasicExample(
+                        modifier = Modifier.padding(paddingValues)
+                    )
+                }
             }
         }
     }

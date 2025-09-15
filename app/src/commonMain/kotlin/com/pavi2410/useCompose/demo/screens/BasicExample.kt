@@ -30,6 +30,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.pavi2410.useCompose.query.DataState
 import com.pavi2410.useCompose.query.FetchStatus
+import com.pavi2410.useCompose.query.core.Key
 import com.pavi2410.useCompose.query.useQuery
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -45,6 +46,9 @@ data class Post(
     val title: String,
     val body: String,
 )
+
+data class PostsListKey(val type: String = "all") : Key
+data class PostDetailKey(val postId: Int) : Key
 
 val httpClient = HttpClient {
     install(ContentNegotiation) {
@@ -90,9 +94,12 @@ fun PostsList(
     onPostClick: (Int) -> Unit,
     visitedPosts: Set<Int>,
 ) {
-    val queryState by useQuery<List<Post>> {
-        httpClient.get("https://jsonplaceholder.typicode.com/posts").body()
-    }
+    val queryState by useQuery(
+        key = PostsListKey(),
+        queryFn = {
+            httpClient.get("https://jsonplaceholder.typicode.com/posts").body<List<Post>>()
+        }
+    )
 
     Column {
         Text(
@@ -184,9 +191,12 @@ fun PostDetail(
         onVisited(postId)
     }
 
-    val queryState by useQuery<Post> {
-        httpClient.get("https://jsonplaceholder.typicode.com/posts/$postId").body()
-    }
+    val queryState by useQuery(
+        key = PostDetailKey(postId),
+        queryFn = {
+            httpClient.get("https://jsonplaceholder.typicode.com/posts/$postId").body<Post>()
+        }
+    )
 
     Column {
         // Back button

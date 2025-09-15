@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
@@ -10,16 +13,16 @@ kotlin {
     androidTarget {
         publishLibraryVariants("release")
 
-        @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+            jvmTarget = JvmTarget.JVM_17
         }
     }
 
     jvm("desktop") {
-        @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+            jvmTarget = JvmTarget.JVM_17
         }
     }
 
@@ -34,16 +37,6 @@ kotlin {
             implementation(libs.kotlin.test)
             implementation(libs.kotlinx.coroutines.test)
             implementation(compose.runtime)
-        }
-
-        androidMain.dependencies {
-            // Android-specific dependencies if needed
-        }
-
-        val desktopMain by getting {
-            dependencies {
-                implementation(libs.kotlinx.coroutines.swing)
-            }
         }
     }
 }

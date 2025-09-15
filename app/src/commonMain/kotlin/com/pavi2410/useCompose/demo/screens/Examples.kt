@@ -4,7 +4,7 @@ import com.pavi2410.useCompose.demo.Screen
 
 data class ExampleScreen(
     val screen: Screen,
-    val title: String
+    val title: String,
 )
 
 val exampleScreens = listOf(
