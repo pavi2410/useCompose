@@ -4,10 +4,10 @@ import androidx.compose.runtime.*
 import kotlinx.coroutines.*
 
 sealed interface MutationState<T> {
-    data object Idle : MutationState<Nothing>
-    data object Loading : MutationState<Nothing>
-    data class Error(val message: Throwable) : MutationState<Nothing>
-    data class Content<T>(val data: T) : MutationState<T>
+    object Idle : MutationState<Nothing>
+    object Loading : MutationState<Nothing>
+    data class Error(val message: String) : MutationState<Nothing>
+    data class Success<T>(val data: T) : MutationState<T>
 }
 
 interface Mutation<T> {

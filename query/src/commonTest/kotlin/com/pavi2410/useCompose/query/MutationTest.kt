@@ -9,33 +9,31 @@ class MutationTest {
         // Test MutationState sealed interface structure
         val idle: MutationState<Nothing> = MutationState.Idle
         val loading: MutationState<Nothing> = MutationState.Loading
-        val error: MutationState<Nothing> = MutationState.Error(RuntimeException("test"))
-        val content: MutationState<String> = MutationState.Content("data")
+        val error: MutationState<Nothing> = MutationState.Error("test")
+        val success: MutationState<String> = MutationState.Success("data")
 
         assertTrue(idle is MutationState.Idle)
         assertTrue(loading is MutationState.Loading)
         assertTrue(error is MutationState.Error)
-        assertTrue(content is MutationState.Content)
-        assertEquals("data", content.data)
+        assertTrue(success is MutationState.Success)
+        assertEquals("data", success.data)
     }
 
     @Test
     fun mutationStateError_preservesExceptionMessage() {
         val errorMessage = "Test mutation error"
-        val exception = IllegalArgumentException(errorMessage)
-        val errorState = MutationState.Error(exception)
+        val errorState = MutationState.Error(errorMessage)
 
-        assertEquals(exception, errorState.message)
-        assertEquals(errorMessage, errorState.message.message)
+        assertEquals(errorMessage, errorState.message)
     }
 
     @Test
     fun mutationStateContent_preservesData() {
         val testResult = listOf("item1", "item2", "item3")
-        val contentState = MutationState.Content(testResult)
+        val successState = MutationState.Success(testResult)
 
-        assertEquals(testResult, contentState.data)
-        assertEquals(3, contentState.data.size)
-        assertEquals("item1", contentState.data[0])
+        assertEquals(testResult, successState.data)
+        assertEquals(3, successState.data.size)
+        assertEquals("item1", successState.data[0])
     }
 }
