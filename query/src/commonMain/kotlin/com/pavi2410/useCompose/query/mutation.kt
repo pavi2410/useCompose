@@ -1,9 +1,17 @@
 package com.pavi2410.useCompose.query
 
-import androidx.compose.runtime.*
-import kotlinx.coroutines.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-sealed interface MutationState<T> {
+sealed interface MutationState<out T> {
     object Idle : MutationState<Nothing>
     object Loading : MutationState<Nothing>
     data class Error(val message: String) : MutationState<Nothing>
@@ -11,23 +19,46 @@ sealed interface MutationState<T> {
 }
 
 interface Mutation<T> {
-    fun mutate(vararg args: String, callback: (T) -> Unit)
+    val mutationState: State<MutationState<T>>
+
+    fun mutate(
+        vararg args: String,
+        onSuccess: (T) -> Unit = {},
+        onError: (String) -> Unit = {},
+    )
+
     fun cancel()
 }
 
 @Composable
-fun <T> useMutation(query: suspend CoroutineScope.(args: Array<out String>) -> T): Mutation<T> {
+fun <T> useMutation(mutationFn: suspend CoroutineScope.(args: Array<out String>) -> T): Mutation<T> {
     val coroutineScope = rememberCoroutineScope()
     return remember {
         object : Mutation<T> {
-            override fun mutate(vararg args: String, callback: (T) -> Unit) {
+            private val _mutationState = mutableStateOf<MutationState<T>>(MutationState.Idle)
+            override val mutationState: State<MutationState<T>> = _mutationState
+
+            override fun mutate(
+                vararg args: String,
+                onSuccess: (T) -> Unit,
+                onError: (String) -> Unit,
+            ) {
+                _mutationState.value = MutationState.Loading
                 coroutineScope.launch {
-                    try {
-                        val result = query(args)
-                        callback(result)
-                    } catch (e: Throwable) {
-                        // Handle error - could be extended to support error callbacks
-                        println("Mutation error: ${e.message}")
+                    withContext(Dispatchers.IO) {
+                        try {
+                            val result = mutationFn(args)
+                            _mutationState.value = MutationState.Success(result)
+                            withContext(Dispatchers.Main) {
+                                onSuccess(result)
+                            }
+                        } catch (e: Throwable) {
+                            val errorMessage = e.message ?: "unknown error"
+                            _mutationState.value = MutationState.Error(errorMessage)
+                            withContext(Dispatchers.Main) {
+                                onError(errorMessage)
+                            }
+                        }
                     }
                 }
             }
