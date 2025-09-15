@@ -9,9 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.pavi2410.useCompose.query.DataState
-import kotlinx.coroutines.delay
 import com.pavi2410.useCompose.query.useQuery
-import com.pavi2410.useCompose.query.QueryState
+import kotlinx.coroutines.delay
 
 @Composable
 fun QueryExample(modifier: Modifier = Modifier) {
