@@ -18,4 +18,8 @@ sealed interface Screen {
     data object Simple : Screen {
         override val title = "Simple Example"
     }
+
+    data object Basic : Screen {
+        override val title = "Basic Example"
+    }
 }

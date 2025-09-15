@@ -11,4 +11,5 @@ val exampleScreens = listOf(
     ExampleScreen(Screen.Query, "Query"),
     ExampleScreen(Screen.Mutation, "Mutation"),
     ExampleScreen(Screen.Simple, "Simple"),
+    ExampleScreen(Screen.Basic, "Basic"),
 )

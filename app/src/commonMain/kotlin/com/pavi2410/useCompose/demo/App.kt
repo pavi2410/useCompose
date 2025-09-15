@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.pavi2410.useCompose.demo.screens.BasicExample
 import com.pavi2410.useCompose.demo.screens.MainScreen
 import com.pavi2410.useCompose.demo.screens.MutationExample
 import com.pavi2410.useCompose.demo.screens.QueryExample
@@ -59,6 +60,9 @@ fun App() {
                     modifier = Modifier.padding(paddingValues)
                 )
                 Screen.Simple -> SimpleExample(
+                    modifier = Modifier.padding(paddingValues)
+                )
+                Screen.Basic -> BasicExample(
                     modifier = Modifier.padding(paddingValues)
                 )
             }
