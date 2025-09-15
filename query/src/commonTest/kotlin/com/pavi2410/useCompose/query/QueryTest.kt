@@ -7,30 +7,28 @@ class QueryTest {
     @Test
     fun queryStateSealed_hasCorrectTypes() {
         // Test QueryState sealed interface structure
-        val loading: QueryState<String> = QueryState.Loading
-        val error: QueryState<String> = QueryState.Error(RuntimeException("test"))
-        val content: QueryState<String> = QueryState.Content("data")
+        val loading: DataState<String> = DataState.Pending
+        val error: DataState<String> = DataState.Error("test")
+        val content: DataState<String> = DataState.Success("data")
 
-        assertTrue(loading is QueryState.Loading)
-        assertTrue(error is QueryState.Error)
-        assertTrue(content is QueryState.Content)
+        assertTrue(loading is DataState.Pending)
+        assertTrue(error is DataState.Error)
+        assertTrue(content is DataState.Success)
         assertEquals("data", content.data)
     }
 
     @Test
     fun queryStateError_preservesExceptionMessage() {
         val errorMessage = "Test error message"
-        val exception = RuntimeException(errorMessage)
-        val errorState = QueryState.Error(exception)
+        val errorState = DataState.Error(errorMessage)
 
-        assertEquals(exception, errorState.message)
-        assertEquals(errorMessage, errorState.message.message)
+        assertEquals(errorMessage, errorState.message)
     }
 
     @Test
     fun queryStateContent_preservesData() {
         val testData = mapOf("key" to "value", "count" to 42)
-        val contentState = QueryState.Content(testData)
+        val contentState = DataState.Success(testData)
 
         assertEquals(testData, contentState.data)
         assertEquals("value", contentState.data["key"])
