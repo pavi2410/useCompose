@@ -19,8 +19,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "useCompose"
 
 include(":app")
-include(":react")
-include(":hooks")
-include(":network")
-include(":colors")
 include(":query")

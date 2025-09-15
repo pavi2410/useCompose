@@ -1,77 +1,73 @@
 plugins {
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.compose.multiplatform)
     id("maven-publish")
 }
 
-android {
-    compileSdk = 34
-    namespace = "me.pavi2410.useCompose.query"
+kotlin {
+    androidTarget {
+        publishLibraryVariants("release")
 
-    defaultConfig {
-        minSdk = 21
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+        @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
         }
     }
-    buildFeatures {
-        compose = true
+
+    jvm("desktop") {
+        @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.get()
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            api(libs.kotlinx.coroutines.core)
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(compose.runtime)
+        }
+
+        androidMain.dependencies {
+            // Android-specific dependencies if needed
+        }
+
+        val desktopMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.swing)
+            }
+        }
     }
-    kotlinOptions {
-        jvmTarget = "17"
+}
+
+android {
+    namespace = "com.pavi2410.useCompose.query"
+    compileSdk = 36
+
+    defaultConfig {
+        minSdk = 24
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-}
-
-dependencies {
-    val composeBom = platform(libs.compose.bom)
-    api(composeBom)
-    androidTestApi(composeBom)
-    api(libs.compose.ui)
-    api(libs.compose.material)
-    api(libs.compose.tooling.preview)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.uiautomator)
-    // Test rules and transitive dependencies:
-    androidTestImplementation(libs.compose.test.junit4)
-    // Needed for createComposeRule, but not createAndroidComposeRule:
-    debugImplementation(libs.compose.test.manifest)
 }
 
 publishing {
     publications {
         register<MavenPublication>("release") {
-            groupId = "me.pavi2410.useCompose"
+            groupId = "com.pavi2410.useCompose"
             artifactId = "query"
-            version = "1.0.0"
-
-            afterEvaluate {
-                from(components["release"])
-            }
+            version = "2.0.0"
         }
     }
 }
