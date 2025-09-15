@@ -9,5 +9,6 @@ data class ExampleScreen(
 
 val exampleScreens = listOf(
     ExampleScreen(Screen.Query, "Query"),
-    ExampleScreen(Screen.Mutation, "Mutation")
+    ExampleScreen(Screen.Mutation, "Mutation"),
+    ExampleScreen(Screen.Simple, "Simple"),
 )

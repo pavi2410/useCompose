@@ -18,23 +18,9 @@ import androidx.compose.ui.Modifier
 import com.pavi2410.useCompose.demo.screens.MainScreen
 import com.pavi2410.useCompose.demo.screens.MutationExample
 import com.pavi2410.useCompose.demo.screens.QueryExample
+import com.pavi2410.useCompose.demo.Screen
+import com.pavi2410.useCompose.demo.screens.SimpleExample
 import com.pavi2410.useCompose.demo.theme.UseComposeTheme
-
-sealed interface Screen {
-    val title: String
-
-    data object Home : Screen {
-        override val title = "useCompose Demo"
-    }
-
-    data object Query : Screen {
-        override val title = "Query Example"
-    }
-
-    data object Mutation : Screen {
-        override val title = "Mutation Example"
-    }
-}
 
 @Composable
 fun App() {
@@ -70,6 +56,9 @@ fun App() {
                     modifier = Modifier.padding(paddingValues)
                 )
                 Screen.Mutation -> MutationExample(
+                    modifier = Modifier.padding(paddingValues)
+                )
+                Screen.Simple -> SimpleExample(
                     modifier = Modifier.padding(paddingValues)
                 )
             }

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -32,6 +33,10 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.kotlinx.serialization.json)
         }
 
         androidMain.dependencies {
@@ -40,12 +45,14 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.material.icons.core)
+            implementation(libs.ktor.client.okhttp)
         }
 
         val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.coroutines.swing)
+                implementation(libs.ktor.client.java)
             }
         }
     }
