@@ -52,11 +52,11 @@ kotlin {
 }
 
 android {
-    namespace = "me.pavi2410.useCompose.demo"
+    namespace = "com.pavi2410.useCompose.demo"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "me.pavi2410.useCompose.demo"
+        applicationId = "com.pavi2410.useCompose.demo"
         minSdk = 24
         targetSdk = 36
         versionCode = 2
@@ -91,7 +91,7 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "me.pavi2410.useCompose.demo.MainKt"
+        mainClass = "com.pavi2410.useCompose.demo.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
@@ -108,7 +108,7 @@ compose.desktop {
             }
 
             macOS {
-                bundleID = "me.pavi2410.useCompose.demo"
+                bundleID = "com.pavi2410.useCompose.demo"
             }
 
             linux {

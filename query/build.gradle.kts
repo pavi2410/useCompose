@@ -49,7 +49,7 @@ kotlin {
 }
 
 android {
-    namespace = "me.pavi2410.useCompose.query"
+    namespace = "com.pavi2410.useCompose.query"
     compileSdk = 36
 
     defaultConfig {
@@ -65,7 +65,7 @@ android {
 publishing {
     publications {
         register<MavenPublication>("release") {
-            groupId = "me.pavi2410.useCompose"
+            groupId = "com.pavi2410.useCompose"
             artifactId = "query"
             version = "2.0.0"
         }
