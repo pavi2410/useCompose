@@ -1,12 +1,23 @@
 package com.pavi2410.useCompose.demo
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.pavi2410.useCompose.demo.screens.*
+import com.pavi2410.useCompose.demo.screens.MainScreen
+import com.pavi2410.useCompose.demo.screens.MutationExample
+import com.pavi2410.useCompose.demo.screens.QueryExample
 import com.pavi2410.useCompose.demo.theme.UseComposeTheme
 
 sealed interface Screen {
@@ -33,6 +44,7 @@ fun App() {
         val showBackButton = currentScreen != Screen.Home
 
         Scaffold(
+            modifier = Modifier.systemBarsPadding(),
             topBar = {
                 TopAppBar(
                     title = { Text(currentScreen.title) },
