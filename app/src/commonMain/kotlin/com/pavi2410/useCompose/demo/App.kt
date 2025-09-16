@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import com.pavi2410.useCompose.demo.screens.BasicExample
 import com.pavi2410.useCompose.demo.screens.MainScreen
 import com.pavi2410.useCompose.demo.screens.MutationExample
+import com.pavi2410.useCompose.demo.screens.PrefetchingExample
 import com.pavi2410.useCompose.demo.screens.QueryExample
 import com.pavi2410.useCompose.demo.screens.SimpleExample
 import com.pavi2410.useCompose.demo.theme.UseComposeTheme
@@ -69,6 +70,10 @@ fun App() {
                     )
 
                     Screen.Basic -> BasicExample(
+                        modifier = Modifier.padding(paddingValues)
+                    )
+
+                    Screen.Prefetching -> PrefetchingExample(
                         modifier = Modifier.padding(paddingValues)
                     )
                 }

@@ -10,11 +10,20 @@ data class CacheEntry<T>(
     val data: T,
     val error: Throwable? = null,
     val isInvalidated: Boolean = false,
+    val timestamp: Long = System.currentTimeMillis(),
 ) {
     /**
      * Create a copy marked as invalidated.
      */
     fun invalidate(): CacheEntry<T> = copy(isInvalidated = true)
+
+    /**
+     * Check if data is stale based on the given stale time.
+     */
+    fun isStale(staleTime: Long): Boolean {
+        if (staleTime == 0L) return true
+        return System.currentTimeMillis() - timestamp > staleTime
+    }
 }
 
 /**

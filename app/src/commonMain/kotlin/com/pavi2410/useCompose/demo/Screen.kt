@@ -22,4 +22,8 @@ sealed interface Screen {
     data object Basic : Screen {
         override val title = "Basic Example"
     }
+
+    data object Prefetching : Screen {
+        override val title = "Prefetching Example"
+    }
 }

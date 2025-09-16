@@ -28,17 +28,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.pavi2410.useCompose.demo.common.httpClient
 import com.pavi2410.useCompose.query.DataState
 import com.pavi2410.useCompose.query.FetchStatus
 import com.pavi2410.useCompose.query.core.Key
 import com.pavi2410.useCompose.query.useQuery
-import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
-import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 
 @Serializable
 data class Post(
@@ -49,14 +46,6 @@ data class Post(
 
 data class PostsListKey(val type: String = "all") : Key
 data class PostDetailKey(val postId: Int) : Key
-
-val httpClient = HttpClient {
-    install(ContentNegotiation) {
-        json(Json {
-            ignoreUnknownKeys = true
-        })
-    }
-}
 
 @Composable
 fun BasicExample(modifier: Modifier = Modifier) {

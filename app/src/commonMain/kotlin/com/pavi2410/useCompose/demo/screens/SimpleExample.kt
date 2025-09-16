@@ -7,17 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.pavi2410.useCompose.demo.common.httpClient
 import com.pavi2410.useCompose.query.DataState
 import com.pavi2410.useCompose.query.FetchStatus
 import com.pavi2410.useCompose.query.core.Key
 import com.pavi2410.useCompose.query.useQuery
-import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
-import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 
 @Serializable
 data class RepoData(
@@ -30,14 +27,6 @@ data class RepoData(
 
 data class RepoKey(val repoPath: String) : Key
 
-val client = HttpClient {
-    install(ContentNegotiation) {
-        json(Json {
-            ignoreUnknownKeys = true
-        })
-    }
-}
-
 @Composable
 fun SimpleExample(modifier: Modifier = Modifier) {
     Column(modifier = modifier.padding(16.dp)) {
@@ -45,7 +34,7 @@ fun SimpleExample(modifier: Modifier = Modifier) {
         val queryState by useQuery(
             key = RepoKey("pavi2410/useCompose"),
             queryFn = {
-                client.get("https://api.github.com/repos/pavi2410/useCompose").body<RepoData>()
+                httpClient.get("https://api.github.com/repos/pavi2410/useCompose").body<RepoData>()
             }
         )
 

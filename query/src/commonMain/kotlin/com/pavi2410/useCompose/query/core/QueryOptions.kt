@@ -10,6 +10,12 @@ data class QueryOptions(
      * Default: true
      */
     val enabled: Boolean = true,
+    /**
+     * Time in milliseconds for how long data remains fresh.
+     * If data is younger than staleTime, prefetch will be skipped.
+     * Default: 0 (always stale)
+     */
+    val staleTime: Long = 0,
 ) {
     companion object {
         /**
