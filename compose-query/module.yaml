@@ -1,0 +1,10 @@
+product:
+  type: lib
+  platforms: [jvm, android, iosArm64, iosSimulatorArm64, iosX64]
+
+dependencies:
+  - $compose.foundation: exported
+
+settings:
+  compose:
+    enabled: true
