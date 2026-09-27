@@ -10,20 +10,9 @@ dependencies:
   - org.jetbrains.compose.material:material-icons-core:1.7.3
 
   - $ktor.client.core
+  - $ktor.client.cio
   - $ktor.client.contentNegotiation
   - $ktor.serialization.kotlinx.json
-
-dependencies@jvm:
-  - $ktor.client.cio
-
-dependencies@android:
-  - $ktor.client.cio
-
-dependencies@ios:
-  - $ktor.client.cio
-
-dependencies@web:
-  - io.ktor:ktor-client-js
 
 settings:
   compose:
