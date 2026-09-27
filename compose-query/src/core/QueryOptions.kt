@@ -1,5 +1,7 @@
 package com.pavi2410.useCompose.query.core
 
+import kotlin.time.Duration
+
 /**
  * Simple configuration options for queries.
  */
@@ -11,11 +13,11 @@ data class QueryOptions(
      */
     val enabled: Boolean = true,
     /**
-     * Time in milliseconds for how long data remains fresh.
+     * How long data remains fresh.
      * If data is younger than staleTime, prefetch will be skipped.
-     * Default: 0 (always stale)
+     * Default: [Duration.ZERO] (always stale)
      */
-    val staleTime: Long = 0,
+    val staleTime: Duration = Duration.ZERO,
 ) {
     companion object {
         /**

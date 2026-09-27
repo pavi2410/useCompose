@@ -16,7 +16,10 @@ import androidx.compose.ui.unit.dp
 import com.pavi2410.useCompose.query.MutationState
 import com.pavi2410.useCompose.query.useMutation
 import kotlinx.coroutines.delay
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 @Composable
 fun MutationExample(modifier: Modifier = Modifier) {
     Column(
@@ -33,7 +36,7 @@ fun MutationExample(modifier: Modifier = Modifier) {
             if (username != "useCompose" || password != "plsUseCompose!") {
                 throw Exception("Invalid credentials")
             }
-            "secret_token:$username/$password@${System.currentTimeMillis()}"
+            "secret_token:$username/$password@${Clock.System.now()}"
         }
         val mutationState by loginMutation.mutationState
 

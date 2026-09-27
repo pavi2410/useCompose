@@ -12,19 +12,22 @@ import com.pavi2410.useCompose.query.DataState
 import com.pavi2410.useCompose.query.core.Key
 import com.pavi2410.useCompose.query.useQuery
 import kotlinx.coroutines.delay
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 data object TokenKey : Key
 
+@OptIn(ExperimentalTime::class)
 @Composable
 fun QueryExample(modifier: Modifier = Modifier) {
     Column(modifier = modifier.padding(16.dp)) {
-        val startTime = remember { System.currentTimeMillis() }
+        val startTime = remember { Clock.System.now() }
 
         val queryState by useQuery(
             key = TokenKey,
             queryFn = {
                 delay(3000)
-                "secret_token@${System.currentTimeMillis()}"
+                "secret_token@${Clock.System.now()}"
             }
         )
 

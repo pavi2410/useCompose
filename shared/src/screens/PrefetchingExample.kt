@@ -38,6 +38,7 @@ import io.ktor.client.request.get
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
+import kotlin.time.Duration.Companion.seconds
 
 @Serializable
 data class CharactersResponse(
@@ -133,7 +134,7 @@ fun PrefetchingExample(modifier: Modifier = Modifier) {
                                             queryClient.prefetchQuery(
                                                 key = CharacterKey(character.id),
                                                 queryFn = { getCharacter(character.id) },
-                                                options = QueryOptions(staleTime = 10 * 1000) // 10 seconds
+                                                options = QueryOptions(staleTime = 10.seconds)
                                             )
                                             // Trigger recomposition to update bold styling
                                             delay(1)

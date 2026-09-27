@@ -45,7 +45,7 @@ fun <T> useMutation(mutationFn: suspend CoroutineScope.(args: Array<out String>)
             ) {
                 _mutationState.value = MutationState.Loading
                 coroutineScope.launch {
-                    withContext(Dispatchers.IO) {
+                    withContext(Dispatchers.Default) {
                         try {
                             val result = mutationFn(args)
                             _mutationState.value = MutationState.Success(result)

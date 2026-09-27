@@ -25,7 +25,7 @@ class QueryClient {
 
         // Not in cache or invalidated, fetch new data
         return try {
-            val data = withContext(Dispatchers.IO) { queryFn() }
+            val data = withContext(Dispatchers.Default) { queryFn() }
             val entry = CacheEntry(data)
             cache.set(key, entry)
             entry
@@ -89,7 +89,7 @@ class QueryClient {
         }
 
         try {
-            val data = withContext(Dispatchers.IO) { queryFn() }
+            val data = withContext(Dispatchers.Default) { queryFn() }
             val entry = CacheEntry(data)
             cache.set(key, entry)
         } catch (e: Throwable) {

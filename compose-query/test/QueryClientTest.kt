@@ -7,6 +7,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
 import kotlin.test.assertNull
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 class QueryClientTest {
 
@@ -143,7 +145,7 @@ class QueryClientTest {
                 callCount++
                 "user-$callCount"
             },
-            options = QueryOptions(staleTime = 10000) // 10 seconds stale time
+            options = QueryOptions(staleTime = 10.seconds)
         )
         assertEquals(1, callCount)
 
@@ -154,18 +156,18 @@ class QueryClientTest {
                 callCount++
                 "user-$callCount"
             },
-            options = QueryOptions(staleTime = 10000)
+            options = QueryOptions(staleTime = 10.seconds)
         )
         assertEquals(1, callCount) // Should not increase
 
-        // Test with 0 stale time (always stale)
+        // Test with zero stale time (always stale)
         client.prefetchQuery(
             key = key,
             queryFn = {
                 callCount++
                 "user-$callCount"
             },
-            options = QueryOptions(staleTime = 0) // Always stale
+            options = QueryOptions(staleTime = Duration.ZERO)
         )
         assertEquals(2, callCount) // Should increase
     }

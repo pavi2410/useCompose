@@ -5,6 +5,9 @@ product:
 dependencies:
   - $compose.foundation: exported
 
+test-dependencies:
+  - org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2
+
 settings:
   compose:
     enabled: true
