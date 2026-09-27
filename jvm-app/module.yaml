@@ -1,9 +1,8 @@
 product: jvm/app
 
 dependencies:
-  - ../shared
+  - //shared
   - $compose.desktop.currentOs
-
 
 settings:
   compose: enabled

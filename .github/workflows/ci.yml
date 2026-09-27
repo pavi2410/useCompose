@@ -17,8 +17,9 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: gradle
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew --console=plain --stacktrace build
+    - name: Grant execute permission for kotlin wrapper
+      run: chmod +x kotlin
+    - name: Build
+      run: ./kotlin build
+    - name: Test
+      run: ./kotlin test

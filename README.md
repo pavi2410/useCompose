@@ -14,25 +14,18 @@ Headless @Composable hooks that drive UI logic. Inspired by React.
 
 **Desktop App:**
 ```bash
-./gradlew :app:run
+./kotlin run -m jvm-app
 ```
 
 **Android App:**
 ```bash
-./gradlew :app:assembleDebug
-./gradlew :app:installDebug
+./kotlin run -m android-app
 ```
 
-**Run Tests:**
+**Build / Test:**
 ```bash
-# All tests
-./gradlew test
-
-# Library tests only
-./gradlew :query:test
-
-# App tests only
-./gradlew :app:test
+./kotlin build
+./kotlin test
 ```
 
 ## Modules

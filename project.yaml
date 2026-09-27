@@ -1,5 +1,5 @@
 modules:
   - android-app
+  - compose-query
   - jvm-app
   - shared
-  - compose-query
