@@ -3,3 +3,4 @@ modules:
   - compose-query
   - jvm-app
   - shared
+  - web-app

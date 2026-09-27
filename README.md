@@ -22,6 +22,11 @@ Headless @Composable hooks that drive UI logic. Inspired by React.
 ./kotlin run -m android-app
 ```
 
+**Web App (Wasm):**
+```bash
+./kotlin run -m web-app
+```
+
 **Build / Test:**
 ```bash
 ./kotlin build
@@ -37,7 +42,7 @@ Headless @Composable hooks that drive UI logic. Inspired by React.
 - **QueryClient** - Centralized cache management with automatic deduplication
 - **Cache Invalidation** - Type-safe cache invalidation patterns
 
-**Platforms supported:** Android, Desktop (JVM), ready for iOS/Web
+**Platforms supported:** Android, Desktop (JVM), iOS, Web (JS / Wasm)
 
 ## Installation
 
