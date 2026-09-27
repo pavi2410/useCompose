@@ -45,20 +45,16 @@ fun <T> useMutation(mutationFn: suspend CoroutineScope.(args: Array<out String>)
             ) {
                 _mutationState.value = MutationState.Loading
                 coroutineScope.launch {
-                    withContext(Dispatchers.Default) {
-                        try {
-                            val result = mutationFn(args)
-                            _mutationState.value = MutationState.Success(result)
-                            withContext(Dispatchers.Main) {
-                                onSuccess(result)
-                            }
-                        } catch (e: Throwable) {
-                            val errorMessage = e.message ?: "unknown error"
-                            _mutationState.value = MutationState.Error(errorMessage)
-                            withContext(Dispatchers.Main) {
-                                onError(errorMessage)
-                            }
+                    try {
+                        val result = withContext(Dispatchers.Default) {
+                            mutationFn(args)
                         }
+                        _mutationState.value = MutationState.Success(result)
+                        onSuccess(result)
+                    } catch (e: Throwable) {
+                        val errorMessage = e.message ?: "unknown error"
+                        _mutationState.value = MutationState.Error(errorMessage)
+                        onError(errorMessage)
                     }
                 }
             }
