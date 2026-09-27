@@ -2,32 +2,6 @@ package com.pavi2410.useCompose.query.core
 
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlin.time.Duration
-import kotlin.time.TimeMark
-import kotlin.time.TimeSource
-
-/**
- * Simple cache entry containing query data and metadata.
- */
-data class CacheEntry<T>(
-    val data: T,
-    val error: Throwable? = null,
-    val isInvalidated: Boolean = false,
-    val timestamp: TimeMark = TimeSource.Monotonic.markNow(),
-) {
-    /**
-     * Create a copy marked as invalidated.
-     */
-    fun invalidate(): CacheEntry<T> = copy(isInvalidated = true)
-
-    /**
-     * Check if data is stale based on the given stale time.
-     */
-    fun isStale(staleTime: Duration): Boolean {
-        if (staleTime == Duration.ZERO) return true
-        return timestamp.elapsedNow() > staleTime
-    }
-}
 
 /**
  * Simple thread-safe query cache.
@@ -56,8 +30,7 @@ class QueryCache {
      */
     suspend fun invalidate(key: Key) = mutex.withLock {
         cache[key]?.let { entry ->
-            @Suppress("UNCHECKED_CAST")
-            cache[key] = (entry as CacheEntry<Any>).invalidate()
+            cache[key] = entry.invalidate()
         }
     }
 
@@ -68,8 +41,7 @@ class QueryCache {
         var count = 0
         cache.keys.filter { it.matches(matcher) }.forEach { key ->
             cache[key]?.let { entry ->
-                @Suppress("UNCHECKED_CAST")
-                cache[key] = (entry as CacheEntry<Any>).invalidate()
+                cache[key] = entry.invalidate()
                 count++
             }
         }

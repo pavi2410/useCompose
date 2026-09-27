@@ -3,6 +3,7 @@ package com.pavi2410.useCompose.query
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.produceState
+import com.pavi2410.useCompose.query.core.CacheEntry
 import com.pavi2410.useCompose.query.core.Key
 import com.pavi2410.useCompose.query.core.QueryOptions
 import kotlinx.coroutines.CoroutineScope
@@ -46,15 +47,15 @@ fun <T> useQuery(
         value = QueryState(FetchStatus.Fetching, value.dataState)
 
         value = try {
-            val cacheEntry = queryClient.getQuery(key, queryFn)
-
-            if (cacheEntry.error != null) {
-                QueryState(
+            when (val cacheEntry = queryClient.getQuery(key, queryFn)) {
+                is CacheEntry.Success -> QueryState(
+                    FetchStatus.Idle,
+                    DataState.Success(cacheEntry.data)
+                )
+                is CacheEntry.Failure -> QueryState(
                     FetchStatus.Idle,
                     DataState.Error(cacheEntry.error.message ?: "unknown error")
                 )
-            } else {
-                QueryState(FetchStatus.Idle, DataState.Success(cacheEntry.data))
             }
         } catch (e: Throwable) {
             QueryState(FetchStatus.Idle, DataState.Error(e.message ?: "unknown error"))

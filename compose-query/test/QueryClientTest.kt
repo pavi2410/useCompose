@@ -1,11 +1,13 @@
 package com.pavi2410.useCompose.query
 
+import com.pavi2410.useCompose.query.core.CacheEntry
 import com.pavi2410.useCompose.query.core.QueryClient
 import com.pavi2410.useCompose.query.core.QueryOptions
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
+import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
@@ -24,7 +26,7 @@ class QueryClientTest {
             callCount++
             "user-123"
         }
-        assertEquals("user-123", entry1.data)
+        assertEquals("user-123", assertIs<CacheEntry.Success<String>>(entry1).data)
         assertEquals(1, callCount)
 
         // Second call should return cached data
@@ -32,7 +34,7 @@ class QueryClientTest {
             callCount++
             "user-123"
         }
-        assertEquals("user-123", entry2.data)
+        assertEquals("user-123", assertIs<CacheEntry.Success<String>>(entry2).data)
         assertEquals(1, callCount) // Should not increase
     }
 
@@ -48,7 +50,7 @@ class QueryClientTest {
             callCount++
             "user-$callCount"
         }
-        assertEquals("user-1", entry1.data)
+        assertEquals("user-1", assertIs<CacheEntry.Success<String>>(entry1).data)
         assertEquals(1, callCount)
 
         // Invalidate and call again
@@ -57,7 +59,7 @@ class QueryClientTest {
             callCount++
             "user-$callCount"
         }
-        assertEquals("user-2", entry2.data)
+        assertEquals("user-2", assertIs<CacheEntry.Success<String>>(entry2).data)
         assertEquals(2, callCount)
     }
 
@@ -127,7 +129,7 @@ class QueryClientTest {
             callCount++
             "user-456" // Different data, should not be called
         }
-        assertEquals("user-123", entry.data)
+        assertEquals("user-123", assertIs<CacheEntry.Success<String>>(entry).data)
         assertEquals(1, callCount) // Should not increase
     }
 
@@ -191,7 +193,10 @@ class QueryClientTest {
             callCount++
             "user-success"
         }
-        assertEquals("Network error", entry.error?.message)
+        assertEquals(
+            "Network error",
+            assertIs<CacheEntry.Failure>(entry).error.message
+        )
         assertEquals(1, callCount) // Should not call queryFn again
     }
 

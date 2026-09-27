@@ -17,25 +17,19 @@ class QueryClient {
         key: Key,
         queryFn: suspend CoroutineScope.() -> T,
     ): CacheEntry<T> {
-        // Try to get from cache first
         val cached = cache.get<T>(key)
         if (cached != null && !cached.isInvalidated) {
             return cached
         }
 
-        // Not in cache or invalidated, fetch new data
         return try {
             val data = withContext(Dispatchers.Default) { queryFn() }
-            val entry = CacheEntry(data)
+            val entry = CacheEntry.Success(data)
             cache.set(key, entry)
             entry
         } catch (e: Throwable) {
-            // If we have cached data, return it with error, otherwise rethrow
             if (cached != null) {
-                val entry = CacheEntry(
-                    data = cached.data,
-                    error = e
-                )
+                val entry = CacheEntry.Failure(e)
                 cache.set(key, entry)
                 entry
             } else {
@@ -83,38 +77,29 @@ class QueryClient {
     ) {
         val cached = cache.get<T>(key)
 
-        // Skip prefetch if data exists and is not stale
         if (cached != null && !cached.isInvalidated && !cached.isStale(options.staleTime)) {
             return
         }
 
         try {
             val data = withContext(Dispatchers.Default) { queryFn() }
-            val entry = CacheEntry(data)
-            cache.set(key, entry)
+            cache.set(key, CacheEntry.Success(data))
         } catch (e: Throwable) {
-            // For prefetch, we don't propagate errors
-            // Just cache the error if we don't have existing data
             if (cached == null) {
-                val entry = CacheEntry(
-                    data = null as T,
-                    error = e
-                )
-                cache.set(key, entry)
+                cache.set(key, CacheEntry.Failure(e))
             }
         }
     }
 
     /**
      * Get cached data for a key without fetching.
-     * Returns null if no data is cached.
+     * Returns null if no successful data is cached.
      */
     suspend fun <T> getQueryData(key: Key): T? {
         val cached = cache.get<T>(key)
-        return if (cached != null && cached.error == null && !cached.isInvalidated) {
-            cached.data
-        } else {
-            null
+        return when (cached) {
+            is CacheEntry.Success -> if (!cached.isInvalidated) cached.data else null
+            else -> null
         }
     }
 }

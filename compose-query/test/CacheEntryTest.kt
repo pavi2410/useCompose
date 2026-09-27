@@ -13,7 +13,7 @@ class CacheEntryTest {
 
     @Test
     fun cacheEntry_isNotStaleWhenFresh() {
-        val entry = CacheEntry("test-data")
+        val entry = CacheEntry.Success("test-data")
 
         assertFalse(entry.isStale(1.seconds))
         assertFalse(entry.isStale(100.milliseconds))
@@ -23,7 +23,7 @@ class CacheEntryTest {
     @Test
     fun cacheEntry_isStaleAfterTime() {
         val timeSource = TestTimeSource()
-        val entry = CacheEntry("test-data", timestamp = timeSource.markNow())
+        val entry = CacheEntry.Success("test-data", timestamp = timeSource.markNow())
 
         timeSource += 200.milliseconds
 
@@ -33,17 +33,17 @@ class CacheEntryTest {
 
     @Test
     fun cacheEntry_alwaysStaleWithZeroStaleTime() {
-        val entry = CacheEntry("test-data")
+        val entry = CacheEntry.Success("test-data")
 
         assertTrue(entry.isStale(Duration.ZERO))
 
-        val entry2 = CacheEntry("test-data-2")
+        val entry2 = CacheEntry.Success("test-data-2")
         assertTrue(entry2.isStale(Duration.ZERO))
     }
 
     @Test
     fun cacheEntry_invalidationPreservesTimestamp() {
-        val entry = CacheEntry("test-data")
+        val entry = CacheEntry.Success("test-data")
         val originalTimestamp = entry.timestamp
 
         val invalidatedEntry = entry.invalidate()
@@ -55,7 +55,7 @@ class CacheEntryTest {
     @Test
     fun cacheEntry_stalenessCheckWorksWithInvalidation() {
         val timeSource = TestTimeSource()
-        val entry = CacheEntry("test-data", timestamp = timeSource.markNow())
+        val entry = CacheEntry.Success("test-data", timestamp = timeSource.markNow())
 
         timeSource += 200.milliseconds
         val invalidatedEntry = entry.invalidate()
@@ -67,7 +67,7 @@ class CacheEntryTest {
     @Test
     fun cacheEntry_customTimestamp() {
         val timeSource = TestTimeSource()
-        val entry = CacheEntry("test-data", timestamp = timeSource.markNow())
+        val entry = CacheEntry.Success("test-data", timestamp = timeSource.markNow())
 
         timeSource += 5.seconds
 
