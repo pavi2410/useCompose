@@ -2,6 +2,8 @@ product:
   type: kmp/lib
   platforms: [jvm, android, iosArm64, iosSimulatorArm64, js, wasmJs]
 
+description: Type-safe Compose Multiplatform query hooks with caching
+
 dependencies:
   - $compose.foundation: exported
 
@@ -11,3 +13,21 @@ test-dependencies:
 settings:
   compose:
     enabled: true
+  publishing:
+    enabled: true
+    group: com.pavi2410.useCompose
+    artifactId: compose-query
+    version: 0.0.0-SNAPSHOT
+    mavenCentral:
+      enabled: true
+      publishingMode: auto
+    signArtifacts: true
+    publishSources: true
+    pom:
+      url: https://github.com/pavi2410/useCompose
+      scm: https://github.com/pavi2410/useCompose.git
+      developers:
+        - name: pavi2410
+      licenses:
+        - name: MIT
+          url: https://opensource.org/license/mit

@@ -6,7 +6,7 @@ Headless @Composable hooks that drive UI logic. Inspired by React.
 
 > **📢 Looking for other hooks?** In v2.0, we focused on KMP support and kept only the `query` module. For other hooks like `useState`, `useEffect`, `useContext`, `useReducer`, `useToggle`, and `useConnectionStatus`, check out [**ComposeHooks**](https://github.com/junerver/ComposeHooks) - a comprehensive collection of Compose hooks!
 
-[![](https://jitpack.io/v/pavi2410/useCompose.svg)](https://jitpack.io/#pavi2410/useCompose) [![CI](https://github.com/pavi2410/useCompose/actions/workflows/ci.yml/badge.svg)](https://github.com/pavi2410/useCompose/actions/workflows/ci.yml)
+[![](https://img.shields.io/maven-central/v/com.pavi2410.useCompose/compose-query)](https://central.sonatype.com/artifact/com.pavi2410.useCompose/compose-query) [![CI](https://github.com/pavi2410/useCompose/actions/workflows/ci.yml/badge.svg)](https://github.com/pavi2410/useCompose/actions/workflows/ci.yml)
 
 ## Quick Start
 
@@ -49,19 +49,10 @@ Headless @Composable hooks that drive UI logic. Inspired by React.
 Add to your `libs.versions.toml`:
 ```toml
 [versions]
-useCompose = "2.0.0"  # Use latest version
+useCompose = "2.1.0"  # Use latest version
 
 [libraries]
-useCompose-query = { module = "com.github.pavi2410.useCompose:query", version.ref = "useCompose" }
-```
-
-Add to your project's `build.gradle.kts` (project level):
-```kotlin
-allprojects {
-    repositories {
-        maven { url = uri("https://jitpack.io") }
-    }
-}
+useCompose-query = { module = "com.pavi2410.useCompose:compose-query", version.ref = "useCompose" }
 ```
 
 Add to your module's `build.gradle.kts`:
