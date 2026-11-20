@@ -11,6 +11,8 @@ test-dependencies:
   - org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2
 
 settings:
+  jvm:
+    release: 21
   compose:
     enabled: true
   publishing:
