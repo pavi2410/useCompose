@@ -8,5 +8,5 @@ settings:
   compose: enabled
   junit: junit-4
   android:
-    namespace: "com.pavi2410.useCompose.demo"
+    applicationId: "com.pavi2410.useCompose.demo"
     minSdk: 24

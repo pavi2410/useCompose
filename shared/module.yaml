@@ -13,10 +13,11 @@ dependencies:
   - $ktor.client.cio
   - $ktor.client.contentNegotiation
   - $ktor.serialization.kotlinx.json
+  - $kotlin.serialization.json
 
 settings:
   compose:
     enabled: true
   ktor: enabled
   kotlin:
-    serialization: json
+    serialization: enabled
